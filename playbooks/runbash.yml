@@ -1,0 +1,12 @@
+---
+- name: Run df -kh on all development servers
+  hosts: development
+  gather_facts: no
+  tasks:
+    - name: Check disk usage with df -kh
+      ansible.builtin.shell: df -kh
+      register: df_output
+
+    - name: Show disk usage output
+      ansible.builtin.debug:
+        var: df_output.stdout
